@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: auto;
+            box-sizing: border-box;
+        }
+        body{
+            margin: auto;
+            padding: 0px;
+            background-color: mintcream;
+        }
+        #main{
+            text-align: center;
+        }
+        form{
+            border: 5px solid burlywood;
+            border-radius: 10PX;
+            margin: 20px 500px 20px;
+        }
+        input{
+            padding: 2px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: transparent;
+            outline-color:black;
+        }
+        #btn{
+            width: 50%;
+            height: 30px;
+            background-color: dimgray;
+            color: white;
+        }
+        p{
+            text-align: left;
+            font-size: large;
+            font-style: italic;
+            color: darkslateblue;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div><h2>Student details</h2></div>
+    <div>
+        <form >
+            <label for="Fname">First Name</label>
+            <input type="text" id="Fname" name="Fname" ><br>
+            <label for="Sname">Surname</label>
+            <input type="text" name="Sname" id="Sname" ><br>
+            <label for="Db">Date Of Birth</label>
+            <input type="date" name="DOB" id="Db" ><br>
+            <label for="gender">Gender</label>
+            <input type="radio" name="gender" id="male" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" name="gender" id="female" value="Female">
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="others" value="Others">
+            <label for="others">Others</label><br>
+            <label for="phone">Phone No.</label>
+            <input type="tel" name="PhoneNo." id="phone" ><br>
+            <label for="place">Address</label>
+            <input type="address" name="address" id="place" ><br>
+            <input type="Submit" onclick="handleSubmit(event)" id="btn"> 
+            <!-- //here in handleSubmit we should pass parameter as event only because if pass e or any other parameter it will throw error it will it show details
+        </form> -->
+        <p id="display"></p>
+        <script>
+            function handleSubmit(e){
+                e.preventDefault();
+                let fname=document.getElementById("Fname").value;
+                let Surname=document.getElementById("Sname").value;
+                let Dob=document.getElementById("Db").value;
+                let gender=document.querySelector('input[name="gender"]:checked')?.value ||"not specified";
+                let phone=document.getElementById("phone").value;
+                let address=document.getElementById("place").value;
+                const Student={
+                    fname,
+                    Surname,
+                    Dob,
+                    gender,
+                    phone,
+                    address
+                };
+                localStorage.setItem("First Name",JSON.stringify(Student.fname));
+                localStorage.setItem("Last Name",JSON.stringify(Student.Surname));
+                localStorage.setItem("DOB",JSON.stringify(Student.Dob));
+                localStorage.setItem("Gender",JSON.stringify(Student.gender));
+                localStorage.setItem("Phone no.",JSON.stringify(Student.phone));
+                localStorage.setItem("Address",JSON.stringify(Student.address));
+
+                document.getElementById("display").innerHTML=`
+                <Strong>Student Details Entered</Strong><br>
+                Name=${fname}, ${Surname}<br>
+                DOB= ${Dob}<br>
+                Gender= ${gender}<br>
+                phone no.= ${phone}<br>
+                Address= ${address}
+                `;
+                
+            };
+        </script>
+    </div>
+    </div>
+    <p id="display"></p>
+</body>
+</html>
